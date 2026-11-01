@@ -1,0 +1,498 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html,
+  body {
+    overflow-x: clip;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-blush font-sans text-base leading-relaxed text-ink antialiased;
+  }
+  /* scroll stays locked until the envelope is opened.
+     Lock <html> too: on mobile the viewport scroll lives on the root element,
+     so body-only overflow:hidden still lets touch swipes scroll the page. */
+  html:not(.opened),
+  html:not(.opened) body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-medium;
+  }
+  ::selection {
+    @apply bg-petal text-ink;
+  }
+  :focus-visible {
+    outline: 3px solid #d94f70;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-sm uppercase tracking-[0.28em] text-mauve;
+  }
+  .card {
+    @apply rounded-3xl border border-line bg-paper/90 p-5 shadow-card;
+  }
+  .btn {
+    @apply inline-flex min-h-12 cursor-pointer select-none items-center justify-center gap-2 rounded-full border border-rose bg-rose px-6 text-[15px] font-medium tracking-wide text-white no-underline shadow-[0_8px_20px_-8px_rgba(217,79,112,.7)] transition-transform duration-200 ease-out hover:-translate-y-0.5 active:scale-95;
+  }
+  .btn-alt {
+    @apply bg-paper text-rose shadow-none;
+  }
+  .section {
+    @apply relative z-[2] mx-auto max-w-3xl px-5 py-[72px] text-center;
+  }
+}
+
+/* ===== scroll reveal (one IntersectionObserver adds .in) ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+[data-reveal="left"] {
+  transform: translate3d(-28px, 0, 0);
+}
+[data-reveal="right"] {
+  transform: translate3d(28px, 0, 0);
+}
+[data-reveal="zoom"] {
+  transform: scale(0.94);
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== hero entrance, gated on html.opened ===== */
+.hero-line {
+  opacity: 0;
+}
+html.opened .hero-line {
+  animation: rise 1s var(--ease) both;
+  animation-delay: var(--d, 0s);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.beat {
+  transform-origin: center;
+  animation: beat 1.8s ease-in-out infinite;
+}
+@keyframes beat {
+  0%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.18);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.1);
+  }
+}
+.scroll-cue {
+  transform-origin: top;
+  animation: cue 2.4s ease-in-out infinite;
+}
+@keyframes cue {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ===== envelope ===== */
+#envelope {
+  transition:
+    opacity 0.8s ease,
+    visibility 0s linear 0.8s;
+}
+html.opened #envelope {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.env-in {
+  animation: env-in 1s var(--ease) both;
+}
+@keyframes env-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) rotate(-2deg);
+  }
+}
+.env {
+  perspective: 1200px;
+}
+.env-flap {
+  z-index: 4;
+  transform-origin: top;
+  transition:
+    transform 0.8s cubic-bezier(0.6, 0, 0.3, 1) 0.25s,
+    z-index 0s linear 0.65s;
+}
+.opening .env-flap {
+  z-index: 1;
+  transform: rotateX(180deg);
+}
+.env-card {
+  transition: transform 0.9s var(--ease) 0.75s;
+}
+.opening .env-card {
+  transform: translate3d(0, -52%, 0);
+}
+.env-seal {
+  animation: breathe 2.6s ease-in-out infinite;
+}
+.env-seal::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(rgba(255, 214, 160, 0.9), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+.opening .env-seal {
+  animation: seal-pop 0.75s var(--ease) forwards;
+}
+.opening .env-seal::after {
+  opacity: 1;
+}
+@keyframes breathe {
+  50% {
+    transform: scale(1.06);
+  }
+}
+@keyframes seal-pop {
+  40% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.env-ring {
+  opacity: 0;
+}
+.opening .env-ring {
+  animation: ring 1.1s ease-out;
+}
+@keyframes ring {
+  from {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(9);
+  }
+}
+.env-flash {
+  opacity: 0;
+}
+.opening .env-flash {
+  animation: flash 1.7s ease;
+}
+@keyframes flash {
+  0%,
+  45% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ===== countdown ===== */
+.digit-in {
+  animation: digit 0.45s var(--ease);
+}
+@keyframes digit {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60%, 0);
+  }
+}
+
+/* ===== heartbeat line + timeline fill ===== */
+.ecg path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.8s var(--ease) 0.3s;
+}
+.in .ecg path {
+  stroke-dashoffset: 0;
+}
+.tl-fill {
+  transform-origin: top;
+}
+@supports (animation-timeline: view()) {
+  .tl-fill {
+    animation: fill linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 55%;
+  }
+  @keyframes fill {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+}
+
+/* ===== lightbox ===== */
+.lb {
+  animation: fade 0.25s ease both;
+}
+.lb-img {
+  animation: lb-slide 0.35s var(--ease) both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes lb-slide {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--from, 0), 0, 0) scale(0.96);
+  }
+}
+
+/* ===== ambient effects (loaded lazily) ===== */
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+.petal {
+  position: absolute;
+  top: -40px;
+  will-change: transform;
+  animation: fall var(--t) linear var(--dl) infinite;
+}
+@keyframes fall {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(var(--sw), calc(100vh + 80px), 0) rotate(var(--rot));
+  }
+}
+.spark {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  clip-path: polygon(
+    50% 0,
+    60% 40%,
+    100% 50%,
+    60% 60%,
+    50% 100%,
+    40% 60%,
+    0 50%,
+    40% 40%
+  );
+  animation: tw var(--t) ease-in-out var(--dl) infinite;
+}
+@keyframes tw {
+  50% {
+    opacity: 0.85;
+    transform: scale(1.25);
+  }
+}
+.plane {
+  position: fixed;
+  left: 0;
+  top: 42vh;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  will-change: transform;
+}
+.plane.on {
+  opacity: 0.65;
+}
+.glow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  width: 220px;
+  height: 220px;
+  margin: -110px 0 0 -110px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 160, 150, 0.32),
+    rgba(255, 196, 130, 0.12) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  will-change: transform;
+}
+.glow.on {
+  opacity: 1;
+}
+.ripple {
+  position: fixed;
+  z-index: 70;
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  border-radius: 50%;
+  background: radial-gradient(rgba(217, 79, 112, 0.32), transparent 70%);
+  pointer-events: none;
+  animation: ripple 0.7s ease-out forwards;
+}
+@keyframes ripple {
+  from {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.tap-heart {
+  position: fixed;
+  z-index: 72;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  color: #d94f70;
+  pointer-events: none;
+  animation: tap-heart 1.1s var(--ease) forwards;
+}
+@keyframes tap-heart {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1);
+  }
+  100% {
+    transform: translate3d(var(--sw, 0), -100px, 0) scale(0.7);
+    opacity: 0;
+  }
+}
+.lantern {
+  position: fixed;
+  bottom: -80px;
+  z-index: 65;
+  width: 34px;
+  height: 46px;
+  border-radius: 12px 12px 8px 8px;
+  background: radial-gradient(#ffe2a0, #e8a23c);
+  box-shadow: 0 0 24px 8px rgba(255, 190, 90, 0.55);
+  pointer-events: none;
+  opacity: 0;
+  animation: lantern 7s ease-out var(--dl) forwards;
+}
+@keyframes lantern {
+  10% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--sw), -115vh, 0) rotate(6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-line,
+  html.opened .hero-line {
+    opacity: 1;
+    animation: none;
+  }
+  .beat,
+  .scroll-cue,
+  .env-seal,
+  .env-in,
+  .digit-in {
+    animation: none;
+  }
+  .ecg path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  #envelope {
+    transition: none;
+  }
+}
+
+/* hero parallax: compositor-driven, no JS (progressive enhancement) */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-parallax {
+      animation: parallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+    @keyframes parallax {
+      to {
+        transform: translate3d(0, 35vh, 0);
+      }
+    }
+  }
+}
