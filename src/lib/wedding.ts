@@ -17,6 +17,7 @@ export type WeddingEvent = {
   day: string;
   time: string;
   venue: string;
+  eventLocation: string;
   dressCode?: string; // falls back to wedding.dressCode
   iso: string; // start time with fixed IST offset (for .ics)
 };
@@ -55,6 +56,7 @@ export const wedding = {
       time: "9:00 AM",
       venue: "Dwaraka Resort, Karimnagar",
       iso: "2026-11-11T09:00:00+05:30",
+      eventLocation: "https://maps.app.goo.gl/zNb41ppNoQYXLRmcA",
     },
     {
       name: "Sangeeth",
@@ -63,6 +65,7 @@ export const wedding = {
       time: "5:00 PM",
       venue: "Dwaraka Resort, Karimnagar",
       iso: "2026-11-11T17:00:00+05:30",
+      eventLocation: "https://maps.app.goo.gl/zNb41ppNoQYXLRmcA",
     },
     {
       name: "Wedding",
@@ -71,6 +74,7 @@ export const wedding = {
       time: "10:06 AM",
       venue: "Shubham Convention, Manchiryal",
       iso: "2026-11-15T10:06:00+05:30",
+      eventLocation: "https://maps.app.goo.gl/KGgj1yhXdfeEB4qX7",
     },
     {
       name: "Reception",
@@ -79,6 +83,7 @@ export const wedding = {
       time: "8:00 PM",
       venue: "Saimanikanta Gardens, Sircilla",
       iso: "2026-11-18T20:00:00+05:30",
+      eventLocation: "https://maps.app.goo.gl/61uw1B1rWvxmQZhu8",
     },
   ] as WeddingEvent[],
 

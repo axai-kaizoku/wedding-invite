@@ -46,7 +46,7 @@ export function Events() {
                 </span>
               </p>
               <a
-                href={wedding.mapsUrl}
+                href={e.eventLocation}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center font-medium text-sage underline-offset-4 hover:underline"
