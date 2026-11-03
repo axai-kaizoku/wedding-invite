@@ -1,4 +1,3 @@
-import { CaricatureDefs } from "@/components/wedding/caricatures";
 import { Album, Effects } from "@/components/wedding/client-islands";
 import { Countdown } from "@/components/wedding/countdown";
 import { Couple } from "@/components/wedding/couple";
@@ -17,7 +16,6 @@ import { Venue } from "@/components/wedding/venue";
 export default function Page() {
   return (
     <>
-      <CaricatureDefs />
       <Envelope />
       <main>
         <Hero />

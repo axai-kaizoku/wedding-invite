@@ -3,8 +3,9 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { haptics } from "@/lib/haptics";
-import { asset, coupleTitle, wedding } from "@/lib/wedding";
+import { photoSrc, wedding } from "@/lib/wedding";
 import { SectionHeading } from "./ornaments";
+import { Photo } from "./photo";
 
 const PH = wedding.photos;
 
@@ -44,35 +45,35 @@ export function Album() {
   return (
     <section className="section">
       <SectionHeading eyebrow="Moments together" title="Photo Album" />
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+      <div className="columns-2 gap-3 md:columns-3">
         {PH.map((p, i) => (
           <div
-            key={p.src}
+            key={p.name}
             data-reveal="zoom"
-            style={{ "--d": `${(i % 3) * 0.08}s` } as React.CSSProperties}
-            className={
-              i === 0
-                ? "col-span-2 aspect-[4/3] md:row-span-2 md:aspect-auto"
-                : "aspect-[3/4]"
+            style={
+              {
+                "--d": `${(i % 3) * 0.08}s`,
+                aspectRatio: `${p.w ?? 2} / ${p.h ?? 3}`,
+              } as React.CSSProperties
             }
+            className="mb-3 break-inside-avoid"
           >
             <button
               type="button"
-              aria-label={`Open photo ${i + 1}`}
+              aria-label={`Open photo ${i + 1}: ${p.alt}`}
               onClick={(e) => {
                 lastFocus.current = e.currentTarget;
                 setDir(0);
                 setIdx(i);
               }}
-              className="group h-full w-full cursor-pointer overflow-hidden rounded-2xl border-[6px] border-paper bg-petal/40 p-0 shadow-photo"
+              className="group h-full w-full cursor-pointer overflow-hidden rounded-2xl border-[5px] border-paper bg-mint/40 p-0 shadow-photo"
             >
-              <img
-                src={asset(p.src)}
-                alt={`${coupleTitle}, photo ${i + 1}`}
-                loading="lazy"
-                decoding="async"
-                style={{ objectPosition: p.pos }}
-                className="block h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              <Photo
+                name={p.name}
+                alt={p.alt}
+                pos={p.pos}
+                sizes="(min-width: 768px) 250px, 46vw"
+                className="transition-transform duration-700 ease-out group-hover:scale-105"
               />
             </button>
           </div>
@@ -84,7 +85,7 @@ export function Album() {
           role="dialog"
           aria-modal="true"
           aria-label="Photo viewer"
-          className="lb fixed inset-0 z-[90] flex items-center justify-center bg-[rgba(45,12,22,.92)]"
+          className="lb fixed inset-0 z-[90] flex items-center justify-center bg-[rgba(18,32,27,.92)]"
           onClick={(e) => e.target === e.currentTarget && close()}
           onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? 0)}
           onTouchEnd={(e) => {
@@ -94,8 +95,9 @@ export function Album() {
         >
           <img
             key={idx}
-            src={asset(PH[idx].src)}
-            alt={`${coupleTitle}, photo ${idx + 1}`}
+            {...photoSrc(PH[idx].name, 1600)}
+            sizes="92vw"
+            alt={PH[idx].alt}
             style={{ "--from": `${dir * 80}px` } as React.CSSProperties}
             className="lb-img max-h-[80vh] max-w-[92vw] rounded-lg object-contain"
           />

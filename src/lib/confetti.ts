@@ -1,5 +1,5 @@
 /** canvas-confetti is imported on demand — never part of first load. */
-const COLORS = ["#D94F70", "#F8D7DA", "#C8923A", "#FFFFFF", "#A3213D"];
+const COLORS = ["#4A7A68", "#DCEBE3", "#C8923A", "#FFFFFF", "#2F5547"];
 
 export async function heartBurst(origin: { x: number; y: number }, count = 60) {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;

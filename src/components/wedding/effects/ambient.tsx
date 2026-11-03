@@ -29,7 +29,7 @@ export function Ambient() {
         top: r() * 100,
         t: 3 + r() * 4,
         dl: -r() * 6,
-        c: i % 3 === 0 ? "#C8923A" : i % 3 === 1 ? "#FFFFFF" : "#F3A3B5",
+        c: i % 3 === 0 ? "#C8923A" : i % 3 === 1 ? "#FFFFFF" : "#CFE3D6",
       })),
     };
   }, []);
@@ -57,13 +57,13 @@ export function Ambient() {
                 width={p.size}
                 height={p.size}
                 viewBox="0 0 24 24"
-                fill="#E8708B"
+                fill="#D9896F"
               >
                 <path d={HEART} />
               </svg>
             ) : (
               <span
-                className="block rounded-[70%_0_70%_0] bg-gradient-to-br from-[#F7B6C2] to-[#D94F70]"
+                className="block rounded-[70%_0_70%_0] bg-gradient-to-br from-[#F6DCC6] to-[#4A7A68]"
                 style={{ width: p.size * 0.8, height: p.size }}
               />
             )}

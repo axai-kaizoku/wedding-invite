@@ -67,7 +67,7 @@ export function LoveToasts() {
       toastOptions={{
         unstyled: false,
         className:
-          "!rounded-2xl !border-[#F1D3D6] !bg-[#FFFBFA]/95 !text-[#4B1D2B] !font-sans !text-[15px] !shadow-[0_10px_30px_-12px_rgba(163,33,61,.35)]",
+          "!rounded-2xl !border-[#DCE6DF] !bg-[#FFFDF8]/95 !text-[#263B33] !font-sans !text-[15px] !shadow-[0_10px_30px_-12px_rgba(47,85,71,.35)]",
       }}
     />
   );

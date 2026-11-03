@@ -35,7 +35,7 @@ export function Venue() {
             style={{ "--d": `${i * 0.08}s` } as React.CSSProperties}
             className="card !p-4"
           >
-            <small className="block text-sm uppercase tracking-[0.18em] text-mauve">
+            <small className="block text-sm uppercase tracking-[0.18em] text-moss">
               {c.label}
             </small>
             <p className="font-serif text-[21px] font-medium capitalize leading-snug">

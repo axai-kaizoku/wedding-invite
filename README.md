@@ -9,8 +9,15 @@ Everything (names, dates, events, venue, links, photos) lives in `src/lib/weddin
 
 ## Photos
 
-Put `photo1.jpg` … `photo5.jpg` in `public/photos/`. Tune each photo's `pos`
-(object-position) in `wedding.ts` so faces never get cropped.
+Engagement photos live in `public/photos/` as WebP at 480 / 960 / 1600px widths
+(`name-480.webp` etc.). Browsers pick the right size via `srcset`. Choose which photo goes
+where (hero, couple cards, album) and its face-safe crop (`pos`) in `src/lib/wedding.ts`.
+
+To add one more (needs `cwebp`, e.g. `brew install webp`):
+
+```bash
+for w in 480 960 1600; do cwebp -q 78 -m 6 -metadata none -resize $w 0 in.jpg -o public/photos/NAME-$w.webp; done
+```
 
 ## Run
 

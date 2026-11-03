@@ -3,6 +3,14 @@
  * Edit here only — components read from this file.
  */
 
+export type Photo = {
+  name: string;
+  alt: string;
+  pos: string;
+  w?: number;
+  h?: number;
+};
+
 export type WeddingEvent = {
   name: string;
   date: string; // display, exactly as given
@@ -71,14 +79,85 @@ export const wedding = {
     },
   ] as WeddingEvent[],
 
-  /** Drop photo1.jpg … photo5.jpg into public/photos. `pos` keeps faces in frame. */
+  /**
+   * Engagement photos (public/photos), each exported as WebP at 480/960/1600px.
+   * `pos` is the CSS object-position that keeps faces in frame when cropped.
+   */
+  heroPhoto: {
+    name: "couple-embrace",
+    alt: "Nagaraj and Poojitha in garlands at their engagement",
+    pos: "50% 22%",
+  },
+  portraits: {
+    groom: {
+      name: "groom-seated",
+      alt: "Nagaraj in his ivory-silver engagement sherwani",
+      pos: "48% 22%",
+    },
+    bride: {
+      name: "bride-portrait",
+      alt: "Poojitha in a sage silk saree with a rose garland",
+      pos: "50% 18%",
+    },
+  },
   photos: [
-    { src: "/photos/photo1.jpg", pos: "center 22%" },
-    { src: "/photos/photo2.jpg", pos: "center 22%" },
-    { src: "/photos/photo3.jpg", pos: "center 22%" },
-    { src: "/photos/photo4.jpg", pos: "center 22%" },
-    { src: "/photos/photo5.jpg", pos: "center 22%" },
-  ],
+    {
+      name: "couple-rings-moment",
+      alt: "Nagaraj slipping the ring on Poojitha's finger",
+      pos: "40% 35%",
+      w: 3,
+      h: 2,
+    },
+    {
+      name: "couple-garlands",
+      alt: "Nagaraj and Poojitha smiling in rose garlands",
+      pos: "50% 20%",
+      w: 2,
+      h: 3,
+    },
+    {
+      name: "rings-in-hand",
+      alt: "Engagement rings resting on a hennaed palm",
+      pos: "50% 60%",
+      w: 2,
+      h: 3,
+    },
+    {
+      name: "bride-seated",
+      alt: "Poojitha seated in her engagement saree",
+      pos: "40% 45%",
+      w: 2,
+      h: 3,
+    },
+    {
+      name: "groom-portrait",
+      alt: "Nagaraj in an ivory embroidered sherwani",
+      pos: "50% 30%",
+      w: 2,
+      h: 3,
+    },
+    {
+      name: "couple-portrait",
+      alt: "Nagaraj and Poojitha posing together",
+      pos: "50% 25%",
+      w: 2,
+      h: 3,
+    },
+    {
+      name: "groom-kurta",
+      alt: "Nagaraj in an ivory kurta with a peach stole",
+      pos: "55% 30%",
+      w: 3,
+      h: 2,
+    },
+    {
+      name: "couple-embrace",
+      alt: "Nagaraj and Poojitha in a warm embrace",
+      pos: "50% 22%",
+      w: 2,
+      h: 3,
+    },
+  ] as Photo[],
 };
 
 export const coupleTitle = `${wedding.names[0]} & ${wedding.names[1]}`;
@@ -90,3 +169,15 @@ export const whatsappUrl = `https://wa.me/${wedding.rsvp.phone}?text=${encodeURI
 /** Prefix public assets with the deploy base path (GitHub Pages sub-path). */
 export const asset = (p: string) =>
   `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${p}`;
+
+const SIZES = [480, 960, 1600] as const;
+/** Responsive WebP sources for a photo exported as name-480/960/1600.webp */
+export const photoSrc = (
+  name: string,
+  fallback: (typeof SIZES)[number] = 960
+) => ({
+  src: asset(`/photos/${name}-${fallback}.webp`),
+  srcSet: SIZES.map((w) => `${asset(`/photos/${name}-${w}.webp`)} ${w}w`).join(
+    ", "
+  ),
+});

@@ -54,43 +54,43 @@ export function Envelope() {
   return (
     <div
       id="envelope"
-      className={`fixed inset-0 z-[100] grid touch-none place-items-center overscroll-none bg-[radial-gradient(ellipse_at_top,#FBE3E4,#FFF5F3_70%)] ${opening ? "opening" : ""}`}
+      className={`fixed inset-0 z-[100] grid touch-none place-items-center overscroll-none bg-[radial-gradient(ellipse_at_top,#E3EFE8,#FBF8F1_70%)] ${opening ? "opening" : ""}`}
     >
-      <p className="absolute top-[calc(48px+env(safe-area-inset-top))] font-serif text-xl italic text-mauve">
+      <p className="absolute top-[calc(48px+env(safe-area-inset-top))] font-serif text-xl italic text-moss">
         {wedding.blessing}
       </p>
 
       <div className="env env-in relative aspect-[3/2] w-[min(86vw,380px)]">
         {/* back */}
-        <div className="absolute inset-0 rounded-xl bg-[#E9A9B4] shadow-[0_24px_50px_-18px_rgba(163,33,61,.45)]" />
+        <div className="absolute inset-0 rounded-xl bg-[#E2D5B9] shadow-[0_24px_50px_-18px_rgba(47,85,71,.45)]" />
         {/* card peeking out */}
         <div className="env-card absolute inset-x-[6%] top-[6%] z-[2] h-[86%] rounded-lg bg-paper px-3 pt-4 text-center">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-mauve">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-moss">
             {wedding.subtitle}
           </p>
           <p className="mt-1 font-serif text-xl">
             {wedding.names[0]}{" "}
-            <span className="font-script text-2xl text-rose">&amp;</span>{" "}
+            <span className="font-script text-2xl text-sage">&amp;</span>{" "}
             {wedding.names[1]}
           </p>
         </div>
         {/* front pocket */}
-        <div className="absolute inset-0 z-[3] rounded-xl bg-[#F2BFC7] [clip-path:polygon(0_0,50%_56%,100%_0,100%_100%,0_100%)]" />
+        <div className="absolute inset-0 z-[3] rounded-xl bg-[#EFE6D3] [clip-path:polygon(0_0,50%_56%,100%_0,100%_100%,0_100%)]" />
         {/* flap */}
-        <div className="env-flap absolute inset-x-0 top-0 h-[60%] rounded-t-xl bg-[#E49AA8] [backface-visibility:hidden] [clip-path:polygon(0_0,100%_0,50%_100%)]" />
+        <div className="env-flap absolute inset-x-0 top-0 h-[60%] rounded-t-xl bg-[#D8C8A6] [backface-visibility:hidden] [clip-path:polygon(0_0,100%_0,50%_100%)]" />
         {/* light ring */}
-        <span className="env-ring pointer-events-none absolute left-1/2 top-[52%] z-[5] -ml-[42px] -mt-[42px] h-[84px] w-[84px] rounded-full border-2 border-rose" />
+        <span className="env-ring pointer-events-none absolute left-1/2 top-[52%] z-[5] -ml-[42px] -mt-[42px] h-[84px] w-[84px] rounded-full border-2 border-sage" />
         {/* wax seal */}
         <button
           ref={seal}
           type="button"
           onClick={open}
           aria-label="Open the invitation"
-          className="env-seal absolute left-1/2 top-[52%] z-[6] -ml-[42px] -mt-[42px] grid h-[84px] w-[84px] cursor-pointer place-items-center rounded-full border-0 bg-[radial-gradient(circle_at_35%_30%,#E66A86,#A3213D)] font-serif text-2xl font-semibold text-white shadow-[0_6px_16px_rgba(120,20,40,.35)]"
+          className="env-seal absolute left-1/2 top-[52%] z-[6] -ml-[42px] -mt-[42px] grid h-[84px] w-[84px] cursor-pointer place-items-center rounded-full border-0 bg-[radial-gradient(circle_at_35%_30%,#6E9C89,#2F5547)] font-serif text-2xl font-semibold text-white shadow-[0_6px_16px_rgba(30,60,48,.35)]"
         >
           {wedding.initials}
         </button>
-        <p className="absolute -bottom-12 w-full text-center text-sm tracking-[0.25em] text-mauve">
+        <p className="absolute -bottom-12 w-full text-center text-sm tracking-[0.25em] text-moss">
           TAP THE SEAL
         </p>
       </div>

@@ -73,12 +73,12 @@ export function PaperPlane() {
         <path
           d="M34 0L-30 -14L-8 0L-30 14Z"
           fill="#FFF"
-          stroke="#D94F70"
+          stroke="#4A7A68"
           strokeWidth="2"
           strokeLinejoin="round"
         />
-        <path d="M-8 0L8 -3L8 3Z" fill="#D94F70" />
-        <path d="M-46 4c-3-4 3-7 5-3c2-4 8 0 5 4l-5 5z" fill="#E8708B" />
+        <path d="M-8 0L8 -3L8 3Z" fill="#4A7A68" />
+        <path d="M-46 4c-3-4 3-7 5-3c2-4 8 0 5 4l-5 5z" fill="#D9896F" />
       </svg>
     </div>
   );

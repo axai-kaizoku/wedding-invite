@@ -38,9 +38,9 @@ export function Countdown() {
       />
       <div data-reveal="zoom">
         {left === null ? (
-          <p className="font-script text-6xl text-rose">Just Married</p>
+          <p className="font-script text-6xl text-sage">Just Married</p>
         ) : (
-          <div className="card grid grid-cols-4 gap-2.5 bg-gradient-to-br from-paper to-[#FFF0F1]">
+          <div className="card grid grid-cols-4 gap-2.5 bg-gradient-to-br from-paper to-[#F1F7F2]">
             {KEYS.map((k, i) => (
               <div key={k}>
                 <span className="block h-[1.15em] overflow-hidden font-serif text-[clamp(30px,9vw,48px)] font-medium leading-[1.15] tabular-nums">
@@ -52,7 +52,7 @@ export function Countdown() {
                     {left ? left[i] : "–"}
                   </b>
                 </span>
-                <span className="text-sm uppercase tracking-[0.15em] text-mauve">
+                <span className="text-sm uppercase tracking-[0.15em] text-moss">
                   {k}
                 </span>
               </div>

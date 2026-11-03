@@ -7,10 +7,10 @@ export function Divider() {
       viewBox="0 0 120 14"
       aria-hidden="true"
     >
-      <path d="M0 7H46M74 7H120" stroke="#D94F70" strokeOpacity=".5" />
+      <path d="M0 7H46M74 7H120" stroke="#4A7A68" strokeOpacity=".5" />
       <path
         d="M60 13C55 9 51 6.5 51 4a3 3 0 0 1 6-1q1.5 1.6 3 3 1.5-1.4 3-3a3 3 0 0 1 6 1c0 2.5-4 5-9 9z"
-        fill="#D94F70"
+        fill="#4A7A68"
       />
     </svg>
   );
@@ -43,7 +43,7 @@ export function Palace(props: React.SVGProps<SVGSVGElement>) {
       aria-hidden="true"
       {...props}
     >
-      <g fill="#E7B3BC">
+      <g fill="#C9DCCF">
         <rect x="120" y="70" width="160" height="130" />
         <path d="M150 70 Q200 0 250 70Z" />
         <rect x="60" y="100" width="46" height="100" />
@@ -55,7 +55,7 @@ export function Palace(props: React.SVGProps<SVGSVGElement>) {
         <rect x="350" y="140" width="30" height="60" />
         <path d="M350 140 Q365 115 380 140Z" />
       </g>
-      <g fill="#FBE3E4">
+      <g fill="#E3EFE8">
         <path d="M180 200 V150 Q200 120 220 150 V200Z" />
         <path d="M135 200 V140 Q148 120 160 140 V200Z" />
         <path d="M240 200 V140 Q252 120 265 140 V200Z" />
@@ -74,7 +74,7 @@ export function MapArt() {
       className="block h-auto w-full"
       aria-hidden="true"
     >
-      <rect width="400" height="220" fill="#FCE9EA" />
+      <rect width="400" height="220" fill="#EAF2EC" />
       <path
         d="M-10 150 Q120 110 200 140 T410 90"
         stroke="#fff"
@@ -89,7 +89,7 @@ export function MapArt() {
       />
       <path
         d="M300 -10 Q260 90 330 230"
-        stroke="#F1D3D6"
+        stroke="#DCE6DF"
         strokeWidth="9"
         fill="none"
       />
@@ -101,7 +101,7 @@ export function MapArt() {
       <circle cx="40" cy="40" r="18" fill="#CFE0D0" opacity=".6" />
       <path
         d="M200 70a16 16 0 0 1 16 16c0 14-16 32-16 32s-16-18-16-32a16 16 0 0 1 16-16z"
-        fill="#D94F70"
+        fill="#4A7A68"
       />
       <circle cx="200" cy="86" r="6" fill="#FFF3E6" />
       <text
@@ -110,7 +110,7 @@ export function MapArt() {
         textAnchor="middle"
         fontFamily="Cormorant Garamond,serif"
         fontSize="22"
-        fill="#4B1D2B"
+        fill="#263B33"
       >
         {wedding.venueName}
       </text>
