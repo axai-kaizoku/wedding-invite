@@ -1,0 +1,12 @@
+{
+  "name": "Nagaraj & Poojitha · Wedding Invitation",
+  "short_name": "N & P Wedding",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FBF8F1",
+  "theme_color": "#E3EFE8",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.webp", "sizes": "512x512", "type": "image/webp" }
+  ]
+}

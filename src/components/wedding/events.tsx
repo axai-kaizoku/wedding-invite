@@ -1,9 +1,11 @@
-import { Flower2, Heart, PartyPopper, Sun } from "lucide-react";
+import { Flower2, Heart, Music, PartyPopper, Sun } from "lucide-react";
 import { wedding } from "@/lib/wedding";
 import { SectionHeading } from "./ornaments";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Mehndi: Flower2,
+  Sangeeth: Music,
+  Sangeet: Music,
   Haldi: Sun,
   Wedding: Heart,
   Reception: PartyPopper,

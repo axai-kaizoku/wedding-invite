@@ -1,9 +1,10 @@
 "use client";
 
-import { CalendarPlus, MapPin } from "lucide-react";
-import { haptics } from "@/lib/haptics";
+import { MapPin } from "lucide-react";
 import { wedding } from "@/lib/wedding";
-import { MapArt, SectionHeading } from "./ornaments";
+import { CalendarMenu } from "./calendar-menu";
+import { LiveMap } from "./live-map";
+import { SectionHeading } from "./ornaments";
 
 export function Venue() {
   const cards: { label: string; value: React.ReactNode }[] = [
@@ -45,17 +46,7 @@ export function Venue() {
         ))}
       </div>
       <div data-reveal="" className="mb-6 flex flex-wrap justify-center gap-3">
-        <button
-          type="button"
-          className="btn"
-          onClick={() => {
-            haptics.tap();
-            // .ics builder is loaded only when needed
-            void import("@/lib/ics").then((m) => m.downloadCalendar());
-          }}
-        >
-          <CalendarPlus size={18} aria-hidden /> Add to Calendar
-        </button>
+        <CalendarMenu />
         <a
           className="btn btn-alt"
           href={wedding.mapsUrl}
@@ -65,18 +56,7 @@ export function Venue() {
           <MapPin size={18} aria-hidden /> Get Directions
         </a>
       </div>
-      <a
-        data-reveal="zoom"
-        href={wedding.mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Open map to ${wedding.venueAddress}`}
-        className="block overflow-hidden rounded-3xl border border-line shadow-card"
-      >
-        <span className="block transition-transform duration-500 ease-out hover:scale-[1.03]">
-          <MapArt />
-        </span>
-      </a>
+      <LiveMap />
     </section>
   );
 }

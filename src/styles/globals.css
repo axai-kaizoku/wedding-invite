@@ -538,3 +538,22 @@ html.opened .hero-zoom {
     animation: none;
   }
 }
+
+/* calendar sheet */
+.cal-opt {
+  @apply flex min-h-14 w-full cursor-pointer items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-3 font-medium text-ink transition-colors hover:bg-mint/50;
+}
+.sheet-up {
+  animation: sheet-up 0.35s var(--ease) both;
+}
+@keyframes sheet-up {
+  from {
+    transform: translate3d(0, 40px, 0);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet-up {
+    animation: none;
+  }
+}

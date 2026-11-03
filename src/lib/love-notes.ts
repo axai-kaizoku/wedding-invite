@@ -3,7 +3,7 @@ import { wedding } from "./wedding";
 const G = wedding.groom.name;
 const B = wedding.bride.name;
 const ev = (name: string) => wedding.events.find((e) => e.name === name);
-const mehndi = ev("Mehndi");
+const sangeeth = ev("Sangeeth");
 const haldi = ev("Haldi");
 const reception = ev("Reception");
 
@@ -47,11 +47,11 @@ export const LOVE_TOASTS: Toast[] = [
     icon: "🌸",
     text: `Tradition says ${G}'s name hides somewhere in ${B}'s mehndi. Good luck finding it, ${G}.`,
   },
-  ...(mehndi
+  ...(sangeeth
     ? [
         {
           icon: "🌿",
-          text: `Mehndi night: ${mehndi.date}, ${mehndi.time}. Bring your best dance moves.`,
+          text: `Sangeeth night: ${sangeeth.date}, ${sangeeth.time}. Bring your best dance moves.`,
         },
       ]
     : []),

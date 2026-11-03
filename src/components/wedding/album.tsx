@@ -1,5 +1,6 @@
 "use client";
 
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { haptics } from "@/lib/haptics";
@@ -80,65 +81,67 @@ export function Album() {
         ))}
       </div>
 
-      {idx !== null && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Photo viewer"
-          className="lb fixed inset-0 z-[90] flex items-center justify-center bg-[rgba(18,32,27,.92)]"
-          onClick={(e) => e.target === e.currentTarget && close()}
-          onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? 0)}
-          onTouchEnd={(e) => {
-            const d = (e.changedTouches[0]?.clientX ?? 0) - touchX.current;
-            if (Math.abs(d) > 50) go(d < 0 ? 1 : -1);
-          }}
-        >
-          <img
-            key={idx}
-            {...photoSrc(PH[idx].name, 1600)}
-            sizes="92vw"
-            alt={PH[idx].alt}
-            style={{ "--from": `${dir * 80}px` } as React.CSSProperties}
-            className="lb-img max-h-[80vh] max-w-[92vw] rounded-lg object-contain"
-          />
-          {[
-            {
-              cls: "left-2.5",
-              label: "Previous",
-              icon: <ChevronLeft />,
-              on: () => go(-1),
-            },
-            {
-              cls: "right-2.5",
-              label: "Next",
-              icon: <ChevronRight />,
-              on: () => go(1),
-            },
-          ].map((b) => (
-            <button
-              key={b.label}
-              type="button"
-              aria-label={b.label}
-              onClick={b.on}
-              className={`absolute ${b.cls} grid h-12 w-12 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/25`}
-            >
-              {b.icon}
-            </button>
-          ))}
-          <button
-            ref={closeRef}
-            type="button"
-            aria-label="Close"
-            onClick={close}
-            className="absolute right-2.5 top-[calc(10px+env(safe-area-inset-top))] grid h-12 w-12 place-items-center rounded-full bg-white/15 text-white"
+      {idx !== null &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo viewer"
+            className="lb fixed inset-0 z-[90] flex items-center justify-center bg-[rgba(18,32,27,.92)]"
+            onClick={(e) => e.target === e.currentTarget && close()}
+            onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? 0)}
+            onTouchEnd={(e) => {
+              const d = (e.changedTouches[0]?.clientX ?? 0) - touchX.current;
+              if (Math.abs(d) > 50) go(d < 0 ? 1 : -1);
+            }}
           >
-            <X />
-          </button>
-          <p className="absolute bottom-[calc(16px+env(safe-area-inset-bottom))] text-[15px] tracking-[0.15em] text-white">
-            {idx + 1} / {PH.length}
-          </p>
-        </div>
-      )}
+            <img
+              key={idx}
+              {...photoSrc(PH[idx].name, 1600)}
+              sizes="92vw"
+              alt={PH[idx].alt}
+              style={{ "--from": `${dir * 80}px` } as React.CSSProperties}
+              className="lb-img max-h-[80vh] max-w-[92vw] rounded-lg object-contain"
+            />
+            {[
+              {
+                cls: "left-2.5",
+                label: "Previous",
+                icon: <ChevronLeft />,
+                on: () => go(-1),
+              },
+              {
+                cls: "right-2.5",
+                label: "Next",
+                icon: <ChevronRight />,
+                on: () => go(1),
+              },
+            ].map((b) => (
+              <button
+                key={b.label}
+                type="button"
+                aria-label={b.label}
+                onClick={b.on}
+                className={`absolute ${b.cls} grid h-12 w-12 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/25`}
+              >
+                {b.icon}
+              </button>
+            ))}
+            <button
+              ref={closeRef}
+              type="button"
+              aria-label="Close"
+              onClick={close}
+              className="absolute right-2.5 top-[calc(10px+env(safe-area-inset-top))] grid h-12 w-12 place-items-center rounded-full bg-white/15 text-white"
+            >
+              <X />
+            </button>
+            <p className="absolute bottom-[calc(16px+env(safe-area-inset-bottom))] text-[15px] tracking-[0.15em] text-white">
+              {idx + 1} / {PH.length}
+            </p>
+          </div>,
+          document.body
+        )}
     </section>
   );
 }

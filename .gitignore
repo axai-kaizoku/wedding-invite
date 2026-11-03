@@ -1,12 +1,11 @@
+# dependencies
 /node_modules
-node_modules
-/out
-out
-.next
-/.next
 
-out/
-
-
-/out
+# next.js build output
+/.next/
 /out/
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
