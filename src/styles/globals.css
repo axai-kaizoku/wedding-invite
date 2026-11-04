@@ -148,7 +148,6 @@ html.opened #envelope {
 }
 @keyframes env-in {
   from {
-    opacity: 0;
     transform: translate3d(0, 30px, 0) rotate(-2deg);
   }
 }
@@ -238,6 +237,191 @@ html.opened #envelope {
   }
   100% {
     opacity: 0;
+  }
+}
+
+/* ----- envelope v2: emerald velvet + gold foil ----- */
+.env-stage {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, #2c5a4a 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 120%, #0f2a22 0%, transparent 60%),
+    linear-gradient(160deg, #1d4337 0%, #143429 55%, #0e261e 100%);
+}
+/* faint damask pattern pressed into the velvet */
+.env-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: radial-gradient(circle at 50% 50%, #e9c46a 1px, transparent 1.5px),
+    radial-gradient(circle at 0 0, #e9c46a 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.env-glow {
+  background: radial-gradient(circle, rgba(233, 196, 106, 0.22) 0%, rgba(233, 196, 106, 0.06) 35%, transparent 65%);
+  animation: env-glow 5s ease-in-out infinite;
+}
+@keyframes env-glow {
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+.env-mote {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(#fff3c4, #e9c46a 45%, transparent 70%);
+  opacity: 0;
+  transform: scale(var(--s, 1));
+  animation: env-mote 6s ease-in-out var(--d, 0s) infinite;
+}
+@keyframes env-mote {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(var(--s, 1));
+  }
+  30%,
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0) scale(var(--s, 1));
+  }
+}
+.env-tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.6s var(--ease);
+  will-change: transform;
+}
+.env-pocket {
+  background: linear-gradient(170deg, #fbf3e1 0%, #f1e4c6 100%);
+}
+.env-flap-paper {
+  background: linear-gradient(180deg, #efe1c0 0%, #e3cfa3 100%);
+}
+.env-shine {
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 246, 214, 0.75) 50%, transparent 65%);
+  transform: translate3d(-120%, 0, 0);
+  animation: env-shine 4.5s ease-in-out 1.2s infinite;
+}
+@keyframes env-shine {
+  0%,
+  55% {
+    transform: translate3d(-120%, 0, 0);
+  }
+  85%,
+  100% {
+    transform: translate3d(120%, 0, 0);
+  }
+}
+.env-seal {
+  background: radial-gradient(circle at 34% 28%, #f6d98c 0%, #d9a845 32%, #a8741f 68%, #7a5212 100%);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.45),
+    inset 0 -4px 8px rgba(90, 55, 10, 0.55),
+    inset 0 3px 6px rgba(255, 240, 200, 0.6),
+    0 0 0 0 rgba(233, 196, 106, 0.6);
+  animation:
+    breathe 2.6s ease-in-out infinite,
+    seal-pulse 2.6s ease-out infinite;
+}
+/* seal is auto-focused on load: no ring for pointer users, gold ring for keyboard */
+.env-seal:focus:not(:focus-visible) {
+  outline: none;
+}
+.env-seal:focus-visible {
+  outline: 3px solid #f3d88a;
+  outline-offset: 6px;
+}
+@keyframes seal-pulse {
+  0% {
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.45),
+      inset 0 -4px 8px rgba(90, 55, 10, 0.55),
+      inset 0 3px 6px rgba(255, 240, 200, 0.6),
+      0 0 0 0 rgba(233, 196, 106, 0.55);
+  }
+  70%,
+  100% {
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.45),
+      inset 0 -4px 8px rgba(90, 55, 10, 0.55),
+      inset 0 3px 6px rgba(255, 240, 200, 0.6),
+      0 0 0 22px rgba(233, 196, 106, 0);
+  }
+}
+.env-seal.holding {
+  animation: none;
+  transform: scale(0.94);
+  transition: transform 0.2s;
+}
+.env-hold circle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.env-seal.holding .env-hold circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.65s linear;
+}
+.opening .env-hold {
+  opacity: 0;
+}
+.env-text {
+  animation: env-rise 1s var(--ease) both;
+}
+.env-hint {
+  animation: env-rise 1s var(--ease) 0.6s both;
+}
+@keyframes env-rise {
+  from {
+    opacity: 0.25;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+.opening .env-text,
+.opening .env-hint {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.env-tap-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e9c46a;
+}
+.env-tap-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid #e9c46a;
+  animation: tap-dot 1.8s ease-out infinite;
+}
+@keyframes tap-dot {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .env-glow,
+  .env-mote,
+  .env-shine,
+  .env-tap-dot::after,
+  .env-text,
+  .env-hint {
+    animation: none;
+  }
+  .env-mote {
+    opacity: 0.6;
+  }
+  .env-tilt {
+    transform: none;
   }
 }
 

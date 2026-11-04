@@ -39,7 +39,7 @@ export function Hero() {
             />
           </div>
           <Heart
-            className="beat absolute -bottom-4 left-1/2 h-8 w-8 -translate-x-1/2 text-sage drop-shadow"
+            className="beat absolute -bottom-4 left-[45%] h-8 w-8 -translate-x-1/2 text-sage drop-shadow"
             fill="currentColor"
             strokeWidth={0}
             aria-hidden

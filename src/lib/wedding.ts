@@ -37,7 +37,7 @@ export const wedding = {
   dateISO: "2026-11-15T10:06:00+05:30",
 
   venueName: "Shubham Convention",
-  venueAddress: "Siddipet Convention Hall, Manchiryal",
+  venueAddress: "Shubham Convention Hall, Manchiryal",
   mapsUrl: "https://maps.app.goo.gl/KGgj1yhXdfeEB4qX7",
   /** Google Maps "Share → Embed a map" URL for the live map on the venue card */
   mapsEmbedUrl:
@@ -57,6 +57,7 @@ export const wedding = {
       venue: "Dwaraka Resort, Karimnagar",
       iso: "2026-11-11T09:00:00+05:30",
       eventLocation: "https://maps.app.goo.gl/zNb41ppNoQYXLRmcA",
+      dressCode: "Traditional",
     },
     {
       name: "Sangeeth",
@@ -66,6 +67,7 @@ export const wedding = {
       venue: "Dwaraka Resort, Karimnagar",
       iso: "2026-11-11T17:00:00+05:30",
       eventLocation: "https://maps.app.goo.gl/zNb41ppNoQYXLRmcA",
+      dressCode: "Party",
     },
     {
       name: "Wedding",
@@ -75,6 +77,7 @@ export const wedding = {
       venue: "Shubham Convention, Manchiryal",
       iso: "2026-11-15T10:06:00+05:30",
       eventLocation: "https://maps.app.goo.gl/KGgj1yhXdfeEB4qX7",
+      dressCode: "Traditional",
     },
     {
       name: "Reception",
@@ -84,6 +87,7 @@ export const wedding = {
       venue: "Saimanikanta Gardens, Sircilla",
       iso: "2026-11-18T20:00:00+05:30",
       eventLocation: "https://maps.app.goo.gl/61uw1B1rWvxmQZhu8",
+      dressCode: "Party",
     },
   ] as WeddingEvent[],
 

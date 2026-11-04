@@ -85,7 +85,7 @@ export const LOVE_TOASTS: Toast[] = [
   },
   {
     icon: "🎶",
-    text: "Sangeet playlist status: 90% Bollywood, 10% uncles requesting old classics.",
+    text: "Sangeet playlist status: 90% Tollywood, 10% uncles requesting old classics.",
   },
   {
     icon: "👟",

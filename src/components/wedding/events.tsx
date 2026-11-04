@@ -41,7 +41,7 @@ export function Events() {
                 <br />
                 {e.venue}
                 <br />
-                <span className="text-moss">
+                <span className="text-moss capitalize">
                   Dress code: {e.dressCode ?? wedding.dressCode}
                 </span>
               </p>

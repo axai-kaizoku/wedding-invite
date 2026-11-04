@@ -1,7 +1,11 @@
 /** canvas-confetti is imported on demand — never part of first load. */
 const COLORS = ["#4A7A68", "#DCEBE3", "#C8923A", "#FFFFFF", "#2F5547"];
 
-export async function heartBurst(origin: { x: number; y: number }, count = 60) {
+export async function heartBurst(
+  origin: { x: number; y: number },
+  count = 60,
+  colors: string[] = COLORS
+) {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const { default: confetti } = await import("canvas-confetti");
   const heart = confetti.shapeFromPath({
@@ -15,7 +19,7 @@ export async function heartBurst(origin: { x: number; y: number }, count = 60) {
     ticks: 150,
     scalar: 1.1,
     shapes: [heart, "circle"],
-    colors: COLORS,
+    colors,
     origin,
     zIndex: 120,
     disableForReducedMotion: true,
